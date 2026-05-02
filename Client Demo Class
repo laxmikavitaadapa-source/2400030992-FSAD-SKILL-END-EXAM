@@ -16,7 +16,6 @@ public class ClientDemo {
 
         Session session = factory.openSession();
 
-        // ---------- INSERT ----------
         Transaction tx = session.beginTransaction();
 
         Customer cust = new Customer("Srikar", "Active");
@@ -25,7 +24,6 @@ public class ClientDemo {
         tx.commit();
         System.out.println("Record Inserted Successfully");
 
-        // ---------- UPDATE ----------
         Transaction tx2 = session.beginTransaction();
 
         Customer existing = session.get(Customer.class, cust.getId());
