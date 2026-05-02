@@ -16,16 +16,13 @@ public class Customer {
     @Column(name = "status")
     private String status;
 
-    // Default Constructor
     public Customer() {}
 
-    // Parameterized Constructor
     public Customer(String name, String status) {
         this.name = name;
         this.status = status;
     }
 
-    // Getters & Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
