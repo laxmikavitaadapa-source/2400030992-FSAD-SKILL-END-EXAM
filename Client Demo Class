@@ -1,0 +1,45 @@
+package com.klu.fsad.exam;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class ClientDemo {
+
+    public static void main(String[] args) {
+
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Customer.class)
+                .buildSessionFactory();
+
+        Session session = factory.openSession();
+
+        // ---------- INSERT ----------
+        Transaction tx = session.beginTransaction();
+
+        Customer cust = new Customer("Srikar", "Active");
+        session.save(cust);
+
+        tx.commit();
+        System.out.println("Record Inserted Successfully");
+
+        // ---------- UPDATE ----------
+        Transaction tx2 = session.beginTransaction();
+
+        Customer existing = session.get(Customer.class, cust.getId());
+        if (existing != null) {
+            existing.setName("Updated Srikar");
+            existing.setStatus("Inactive");
+
+            session.update(existing);
+        }
+
+        tx2.commit();
+        System.out.println("Record Updated Successfully");
+
+        session.close();
+        factory.close();
+    }
+}
